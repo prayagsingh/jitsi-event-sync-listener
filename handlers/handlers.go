@@ -23,7 +23,6 @@ func RoomCreated(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("room-created: ", req_data)
-	w.WriteHeader(http.StatusOK)
 }
 
 func OccupantJoined(w http.ResponseWriter, r *http.Request) {
@@ -40,7 +39,6 @@ func OccupantJoined(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("occupant joined: ", req_data)
-	w.WriteHeader(http.StatusOK)
 }
 
 func OccupantLeft(w http.ResponseWriter, r *http.Request) {
@@ -57,7 +55,6 @@ func OccupantLeft(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("occupant left: ", req_data)
-	w.WriteHeader(http.StatusOK)
 }
 
 func RoomDestroyed(w http.ResponseWriter, r *http.Request) {
@@ -74,5 +71,4 @@ func RoomDestroyed(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("room destroyed: ", req_data)
-	w.WriteHeader(http.StatusOK)
 }
