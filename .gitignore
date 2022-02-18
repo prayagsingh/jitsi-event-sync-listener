@@ -1,0 +1,9 @@
+.build
+.vscode
+/jitsi-event*
+bin/jitsi-event-sync-listner*
+jitsi-event-sync-listner
+*.tar.gz
+*.test
+*.mprof
+.git/

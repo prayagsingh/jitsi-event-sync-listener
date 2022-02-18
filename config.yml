@@ -1,0 +1,8 @@
+development:
+  dialect: postgres
+  database: jitsi-event-sync
+  user: admin
+  password: admin
+  host: 127.0.0.1
+  pool: 5
+  port: 5432

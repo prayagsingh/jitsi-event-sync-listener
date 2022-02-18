@@ -1,0 +1,15 @@
+# This file if for connecting Soda to the database
+development:
+  dialect: postgres
+  database: jitsi-event-sync
+  user: admin
+  password: admin
+  host: 127.0.0.1
+  pool: 5
+  port: 5432
+
+test:
+ url: {{envOr "TEST_DATABASE_URL" "postgres://admin:admin@127.0.0.1:5432/jitsi-event-sync"}}
+
+production:
+ url: {{envOr "DATABASE_URL" "postgres://admin:admin@127.0.0.1:5432/jitsi-event-sync"}}
