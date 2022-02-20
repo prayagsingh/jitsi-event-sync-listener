@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -17,7 +16,7 @@ func RoomCreated(c *gin.Context) {
 
 	db := connection.GetPostgresDB()
 
-	log.Println("value of db is: ", db)
+	//log.Println("value of db is: ", db)
 	// initializing the request data struct
 	req_data := models.RoomEvents{}
 
@@ -47,7 +46,7 @@ func OccupantJoined(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("value of req_data is: ", req_data)
+	//fmt.Println("value of req_data is: ", req_data)
 	db.Create(&req_data)
 
 	c.JSON(http.StatusOK, gin.H{"occupant-joined": req_data})

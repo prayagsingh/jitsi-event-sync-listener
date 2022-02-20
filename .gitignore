@@ -7,3 +7,6 @@ jitsi-event-sync-listner
 *.test
 *.mprof
 .git/
+init-db
+.env
+pgdata

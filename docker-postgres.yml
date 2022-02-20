@@ -13,7 +13,7 @@ services:
       - POSTGRES_DB=jitsi-event-sync
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-      - ./init-db/init-db.sql:/docker-entrypoint-initdb.d/init.sql  # using it for uuid generation
+      #- ./init-db/init-db.sql:/docker-entrypoint-initdb.d/init.sql  # using it for uuid generation
     networks:
       - postgress_network
 networks:
