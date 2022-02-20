@@ -32,11 +32,14 @@ func SetupDB(db_host, db_user, db_name, db_password string, db_port int) *gorm.D
 		log.Fatal("Error connecting to DB: ", err)
 	}
 
-	db.AutoMigrate(&models.SaveRoomDestroyed{}, &models.SaveRoomEvents{})
+	//db.AutoMigrate(&models.SaveRoomDestroyed{}, &models.SaveRoomEvents{})
+	db.AutoMigrate(&models.RoomEvents{})
 
 	// Initialize the DB instance
-	db.Create(&models.SaveRoomDestroyed{})
-	db.Create(&models.SaveRoomEvents{})
+	db.Create(&models.RoomEvents{})
+	//db.Create(&models.RoomDestroyedEvents{})
+
+	//db.Create(&models.SaveRoomEvents{})
 
 	dbConn.SQL = db
 	return db

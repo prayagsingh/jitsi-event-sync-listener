@@ -2,20 +2,12 @@ package models
 
 import (
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
-// UserDetails for the handling All Occupants in JSON sent by the muc-room-destroyed event
-type UserDetails struct {
-	Name        string    `json:"name"`
-	Email       string    `json:"email"`
-	Id          uuid.UUID `json:"id" gorm:"unique; type:uuid; column:id; default:uuid_generate_v4(); not_null"`
-	OccupantJid string    `json:"occupant_jid"`
-	JoinedAt    int64     `json:"joined_at"`
-	LeftAt      int64     `json:"left_at"`
-}
-
-// RequestData for the handling the JSON request sent by events
-type RoomDestroyed struct {
+// RoomDestroyedEvent is the struct for the room_destroyed event
+type RoomDestroyedEvents struct {
+	gorm.Model
 	EventName    string        `json:"event_name"`
 	RoomName     string        `json:"room_name"`
 	RoomJID      string        `json:"room_jid" gorm:"primaryKey"`
@@ -24,46 +16,55 @@ type RoomDestroyed struct {
 	AllOccupants []UserDetails `json:"all_occupants"`
 }
 
+// RoomEvents is the struct for the room_created event
 type RoomEvents struct {
-	EventName   string `json:"event_name"`
-	RoomName    string `json:"room_name"`
-	RoomJID     string `json:"room_jid" gorm:"primaryKey"`
-	StartedAt   int64  `json:"created_at"`
-	DestroyedAt int64  `json:"destroyed_at"`
-	Occupant    User   `json:"occupant"`
+	gorm.Model
+	EventName   string      `json:"event_name"`
+	RoomName    string      `json:"room_name"`
+	RoomJID     string      `json:"room_jid"`
+	StartedAt   int64       `json:"created_at"`
+	DestroyedAt int64       `json:"destroyed_at"`
+	Occupant    UserDetails `gorm:"embedded" json:"occupant"`
 }
 
 // User for the handling the JSON request sent by muc-occupant-joined events
-type User struct {
-	Name        string    `json:"name"`
-	Email       string    `json:"email"`
-	Id          uuid.UUID `json:"id" gorm:"unique; type:uuid; column:id; default:uuid_generate_v4(); not_null"`
-	OccupantJid string    `json:"occupant_jid"`
-	JoinedAt    int64     `json:"joined_at"`
-	LeftAt      int64     `json:"left_at"`
+type UserDetails struct {
+	Name        string `json:"name"`
+	Email       string `json:"email"`
+	UserId          string `json:"id"`
+	OccupantJid string `json:"occupant_jid"`
+	JoinedAt    int64  `json:"joined_at"`
+	LeftAt      int64  `json:"left_at"`
 }
 
-// SaveRoomDestroyed for sending data to DB
-type SaveRoomDestroyed struct {
-	EventName    string
-	RoomName     string
-	RoomJID      string
-	StartedAt    int64
-	DestroyedAt  int64
-	AllOccupants []UserDetails
+// BeforeCreate will set a UUID rather than numeric ID.
+func (user *UserDetails) BeforeCreate(tx *gorm.DB) (err error) {
+	// UUID version 4
+	user.UserId = uuid.NewString()
+	return
 }
 
-// SaveRoomEvents for sending data to DB
-type SaveRoomEvents struct {
-	EventName   string
-	RoomName    string
-	RoomJID     string
-	StartedAt   int64
-	DestroyedAt int64
-	Name        string
-	Email       string
-	Id          uuid.UUID
-	OccupantJid string
-	JoinedAt    int64
-	LeftAt      int64
-}
+// // SaveRoomDestroyed for sending data to DB
+// type SaveRoomDestroyed struct {
+// 	EventName    string
+// 	RoomName     string
+// 	RoomJID      string
+// 	StartedAt    int64
+// 	DestroyedAt  int64
+// 	AllOccupants []UserDetails
+// }
+
+// // SaveRoomEvents for sending data to DB
+// type SaveRoomEvents struct {
+// 	EventName   string
+// 	RoomName    string
+// 	RoomJID     string
+// 	StartedAt   int64
+// 	DestroyedAt int64
+// 	Name        string
+// 	Email       string
+// 	Id          uuid.UUID
+// 	OccupantJid string
+// 	JoinedAt    int64
+// 	LeftAt      int64
+// }

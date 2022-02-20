@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -26,23 +27,9 @@ func RoomCreated(c *gin.Context) {
 		return
 	}
 
-	saveData := models.SaveRoomEvents{
-		EventName:   req_data.EventName,
-		RoomName:    req_data.RoomName,
-		RoomJID:     req_data.RoomJID,
-		StartedAt:   req_data.StartedAt,
-		DestroyedAt: req_data.DestroyedAt,
-		Name:        req_data.Occupant.Name,
-		Email:       req_data.Occupant.Email,
-		Id:          req_data.Occupant.Id,
-		OccupantJid: req_data.Occupant.OccupantJid,
-		JoinedAt:    req_data.Occupant.JoinedAt,
-		LeftAt:      req_data.Occupant.LeftAt,
-	}
+	db.Create(&req_data)
 
-	db.Create(&saveData)
-
-	c.JSON(http.StatusOK, gin.H{"room-created": saveData})
+	c.JSON(http.StatusOK, gin.H{"room-created": req_data})
 }
 
 func OccupantJoined(c *gin.Context) {
@@ -60,23 +47,10 @@ func OccupantJoined(c *gin.Context) {
 		return
 	}
 
-	saveData := models.SaveRoomEvents{
-		EventName:   req_data.EventName,
-		RoomName:    req_data.RoomName,
-		RoomJID:     req_data.RoomJID,
-		StartedAt:   req_data.StartedAt,
-		DestroyedAt: req_data.DestroyedAt,
-		Name:        req_data.Occupant.Name,
-		Email:       req_data.Occupant.Email,
-		Id:          req_data.Occupant.Id,
-		OccupantJid: req_data.Occupant.OccupantJid,
-		JoinedAt:    req_data.Occupant.JoinedAt,
-		LeftAt:      req_data.Occupant.LeftAt,
-	}
+	fmt.Println("value of req_data is: ", req_data)
+	db.Create(&req_data)
 
-	db.Create(&saveData)
-
-	c.JSON(http.StatusOK, gin.H{"occupant-joined": saveData})
+	c.JSON(http.StatusOK, gin.H{"occupant-joined": req_data})
 }
 
 func OccupantLeft(c *gin.Context) {
@@ -94,23 +68,9 @@ func OccupantLeft(c *gin.Context) {
 		return
 	}
 
-	saveData := models.SaveRoomEvents{
-		EventName:   req_data.EventName,
-		RoomName:    req_data.RoomName,
-		RoomJID:     req_data.RoomJID,
-		StartedAt:   req_data.StartedAt,
-		DestroyedAt: req_data.DestroyedAt,
-		Name:        req_data.Occupant.Name,
-		Email:       req_data.Occupant.Email,
-		Id:          req_data.Occupant.Id,
-		OccupantJid: req_data.Occupant.OccupantJid,
-		JoinedAt:    req_data.Occupant.JoinedAt,
-		LeftAt:      req_data.Occupant.LeftAt,
-	}
+	db.Create(&req_data)
 
-	db.Create(&saveData)
-
-	c.JSON(http.StatusOK, gin.H{"occupant-left": saveData})
+	c.JSON(http.StatusOK, gin.H{"occupant-left": req_data})
 }
 
 func RoomDestroyed(c *gin.Context) {
@@ -118,7 +78,7 @@ func RoomDestroyed(c *gin.Context) {
 
 	db := connection.GetPostgresDB()
 	// initializing the request data struct
-	req_data := models.RoomDestroyed{}
+	req_data := models.RoomDestroyedEvents{}
 
 	// fetching the data from the request
 	if err := c.ShouldBindJSON(&req_data); err != nil {
@@ -126,16 +86,7 @@ func RoomDestroyed(c *gin.Context) {
 		return
 	}
 
-	saveData := models.SaveRoomDestroyed{
-		EventName:   req_data.EventName,
-		RoomName:    req_data.RoomName,
-		RoomJID:     req_data.RoomJID,
-		StartedAt:   req_data.StartedAt,
-		DestroyedAt: req_data.DestroyedAt,
-		AllOccupants: req_data.AllOccupants,
-	}
+	db.Create(&req_data)
 
-	db.Create(&saveData)
-
-	c.JSON(http.StatusOK, gin.H{"room-destroyed": saveData})
+	c.JSON(http.StatusOK, gin.H{"room-destroyed": req_data})
 }
