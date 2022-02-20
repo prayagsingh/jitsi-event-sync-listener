@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  jitsi-event-sync:
+    image: prayagsingh/jitsi-event-sync:latest
+    container_name: jitsi-event-sync
+    ports:
+      - "7002:7002"
+    restart: always
+    environment: 
+      - POSTGRES_DATABASE=jitsi-event-sync
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_HOST=172.19.0.2
+      - POSTGRES_DB_POOL=5
+      - POSTGRES_PORT=5432
+    #env_file: .env  
+    networks:
+      jitsi:
+      postgres:
+
+networks:
+    jitsi:
+      external: true
+    postgres:
+      external: true  

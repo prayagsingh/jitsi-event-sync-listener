@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  postgesql:
+    image: postgres:13.4-alpine
+    container_name: postgesql
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=jitsi-event-sync
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      #- ./init-db/init-db.sql:/docker-entrypoint-initdb.d/init.sql  # using it for uuid generation
+    networks:
+      postgres:
+      
+networks:
+    postgres:
+      external: true  
+volumes:
+  pgdata:
