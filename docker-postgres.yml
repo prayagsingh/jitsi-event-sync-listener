@@ -12,10 +12,13 @@ services:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=jitsi-event-sync
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
       #- ./init-db/init-db.sql:/docker-entrypoint-initdb.d/init.sql  # using it for uuid generation
     networks:
-      - postgress_network
+      postgres:
+      
 networks:
-  postgress_network:
-    driver: bridge
+    postgres:
+      external: true  
+volumes:
+  pgdata:

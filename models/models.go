@@ -61,28 +61,3 @@ func (user *RoomDestroyedUserDetails) BeforeCreate(tx *gorm.DB) (err error) {
 	user.UserId = uuid.NewString()
 	return
 }
-
-// // SaveRoomDestroyed for sending data to DB
-// type SaveRoomDestroyed struct {
-// 	EventName    string
-// 	RoomName     string
-// 	RoomJID      string
-// 	StartedAt    int64
-// 	DestroyedAt  int64
-// 	AllOccupants []UserDetails
-// }
-
-// // SaveRoomEvents for sending data to DB
-// type SaveRoomEvents struct {
-// 	EventName   string
-// 	RoomName    string
-// 	RoomJID     string
-// 	StartedAt   int64
-// 	DestroyedAt int64
-// 	Name        string
-// 	Email       string
-// 	Id          uuid.UUID
-// 	OccupantJid string
-// 	JoinedAt    int64
-// 	LeftAt      int64
-// }

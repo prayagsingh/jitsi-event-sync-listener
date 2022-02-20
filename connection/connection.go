@@ -15,7 +15,7 @@ type DB struct {
 
 var dbConn = &DB{}
 
-func SetupDB(db_host, db_user, db_name, db_password string, db_port int) *gorm.DB {
+func SetupDB(db_host, db_user, db_name, db_password, db_port string) *gorm.DB {
 
 	conn_name := fmt.Sprintf(
 		"host=%v port=%v user=%v dbname=%v password=%v sslmode=disable",
@@ -38,8 +38,6 @@ func SetupDB(db_host, db_user, db_name, db_password string, db_port int) *gorm.D
 	// Initialize the DB instance
 	db.Create(&models.RoomEvents{})
 	db.Create(&models.RoomDestroyedEvents{})
-
-	//db.Create(&models.SaveRoomEvents{})
 
 	dbConn.SQL = db
 	return db

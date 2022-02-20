@@ -10,3 +10,5 @@ jitsi-event-sync-listner
 init-db
 .env
 pgdata
+database.env
+*.env

@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"os/signal"
@@ -20,23 +19,18 @@ var PORT = ":7002"
 // creating a golang http server
 func main() {
 
-	viper.SetConfigName("config") // Set the file name of the configurations file
-	viper.AutomaticEnv()          // Enable VIPER to read Environment Variables
-	viper.SetConfigType("yaml")   // REQUIRED if the config file does not have the extension in the name
-	viper.AddConfigPath(".")      // optionally look for config in the working directory
-	// find and read the config file
-	if err := viper.ReadInConfig(); err != nil {
-		panic(fmt.Errorf("fatal error config file: %w", err))
-	}
+	// Enable VIPER to read Environment Variables
+	viper.AutomaticEnv()
 
-	db_host := viper.GetString("development.host")
-	db_name := viper.GetString("development.database")
-	db_user := viper.GetString("development.user")
-	db_password := viper.GetString("development.password")
-	db_port := viper.GetInt("development.port")
+	db_user := viper.Get("POSTGRES_USER")
+	db_password := viper.Get("POSTGRES_PASSWORD")
+	db_name := viper.Get("POSTGRES_DATABASE")
+	db_host := viper.Get("POSTGRES_HOST")
+	db_port := viper.Get("POSTGRES_PORT")
 
+	log.Printf("Connecting to DB: %v:%v@%v:%v/%v", db_user, db_password, db_host, db_port, db_name)
 	// Setup the DB
-	connection.SetupDB(db_host, db_user, db_name, db_password, db_port)
+	connection.SetupDB(db_host.(string), db_user.(string), db_name.(string), db_password.(string), db_port.(string))
 
 	// Create context that listens for the interrupt signal from the OS.
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)

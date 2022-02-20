@@ -16,7 +16,6 @@ func Init(router *gin.Engine) {
 		v1.POST("/events/room/destroyed", handlers.RoomDestroyed)
 		v1.POST("/events/occupant/joined", handlers.OccupantJoined)
 		v1.POST("/events/occupant/left", handlers.OccupantLeft)
-
 	}
 
 	router.NoRoute(func(c *gin.Context) {
