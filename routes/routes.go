@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/prayagsingh/jitsi-event-sync-listner/handlers"
+	"github.com/prayagsingh/jitsi-event-sync-listener/handlers"
 )
 
 // Init for initializing the routes

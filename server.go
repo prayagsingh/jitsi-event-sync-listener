@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/prayagsingh/jitsi-event-sync-listner/connection"
-	"github.com/prayagsingh/jitsi-event-sync-listner/routes"
+	"github.com/prayagsingh/jitsi-event-sync-listener/connection"
+	"github.com/prayagsingh/jitsi-event-sync-listener/routes"
 	"github.com/spf13/viper"
 )
 
