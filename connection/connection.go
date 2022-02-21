@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/prayagsingh/jitsi-event-sync-listner/models"
+	"github.com/prayagsingh/jitsi-event-sync-listener/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

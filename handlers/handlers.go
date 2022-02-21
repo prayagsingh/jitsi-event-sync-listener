@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/prayagsingh/jitsi-event-sync-listner/connection"
-	"github.com/prayagsingh/jitsi-event-sync-listner/models"
+	"github.com/prayagsingh/jitsi-event-sync-listener/connection"
+	"github.com/prayagsingh/jitsi-event-sync-listener/models"
 )
 
 // RoomCreated handles the room_created event
