@@ -7,7 +7,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/spf13/viper v1.13.0
 	gorm.io/driver/postgres v1.4.0
-	gorm.io/gorm v1.23.9
+	gorm.io/gorm v1.24.0
 )
 
 require (
