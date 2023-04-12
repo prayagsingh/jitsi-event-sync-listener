@@ -1,5 +1,5 @@
 # Using golang:1.17.7-alpine3.15
-FROM golang@sha256:1dc6a836407ef26c761af27bd39eb86ec385bab0f89a6c969bb1a04b342f7074 AS builder
+FROM golang@sha256:6a09d7e431f3a2e263c6e7f14f26db634f2f707b8f3efb7255a54d9ff2c6ee3a AS builder
 
 # Install git + SSL ca certificates(for exposing this app on https).
 # Git is required for fetching the dependencies.
